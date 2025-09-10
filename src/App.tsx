@@ -1,15 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import { PlusCircle } from "lucide-react";
 import type { FC } from "react";
 import type { Article, FilterState } from "./types";
 import { MOCK_ARTICLES } from "./constants";
-import { ArticleFormModal, ArticleItem, FilterBar } from "./components";
+import { ArticleFormModal, ArticleItem, FilterBar, Header } from "./components";
 
 const App: FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<Article | null>(null);
-  
+
   const [filters, setFilters] = useState<FilterState>({});
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -106,16 +105,7 @@ const App: FC = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans">
       <div className="container mx-auto p-4 md:p-8">
-        <header className="flex justify-between items-center mb-6">
-          <h1 className="text-4xl font-bold">Nymble</h1>
-          <button
-            onClick={() => handleOpenModal()}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg flex items-center space-x-2"
-          >
-            <PlusCircle className="w-5 h-5" />
-            <span>Thêm bài viết</span>
-          </button>
-        </header>
+        <Header onAddArticle={() => handleOpenModal()} />
 
         <main>
           <FilterBar
