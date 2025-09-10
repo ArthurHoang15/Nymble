@@ -15,7 +15,7 @@ export interface Article {
   tags: string[];
 }
 
-// Form data type for handling tags as string
+// Form data type for handling tags as array
 export type ArticleFormData = {
   title?: string;
   source_url?: string;
@@ -25,7 +25,7 @@ export type ArticleFormData = {
   rating?: number;
   status?: ArticleStatus;
   notes?: string;
-  tags: string;
+  tags: string[];
 };
 
 export interface FilterState {
@@ -42,6 +42,7 @@ export interface ArticleFormModalProps {
     article: Omit<Article, "id" | "created_at"> & { id?: number }
   ) => void;
   article: Article | null;
+  allTags: string[];
 }
 
 export interface FilterBarProps {

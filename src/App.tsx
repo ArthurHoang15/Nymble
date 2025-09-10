@@ -150,6 +150,7 @@ const App: FC = () => {
           onClose={handleCloseModal}
           onSave={handleSaveArticle}
           article={editingArticle}
+          allTags={allTags}
         />
       </div>
     </div>

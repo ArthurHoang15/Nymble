@@ -4,14 +4,16 @@ import type { FC, ChangeEvent, FormEvent } from 'react';
 import type { ArticleFormModalProps, ArticleFormData, Article } from '../types';
 import { STATUS_OPTIONS, RATING_LABELS } from '../constants';
 import StarRating from './StarRating';
+import TagInput from './TagInput';
 
 const ArticleFormModal: FC<ArticleFormModalProps> = ({
   isOpen,
   onClose,
   onSave,
   article,
+  allTags,
 }) => {
-  const [formData, setFormData] = useState<ArticleFormData>({ tags: "" });
+  const [formData, setFormData] = useState<ArticleFormData>({ tags: [] });
 
   useEffect(() => {
     if (isOpen) {
@@ -25,7 +27,7 @@ const ArticleFormModal: FC<ArticleFormModalProps> = ({
           rating: article.rating,
           status: article.status,
           notes: article.notes,
-          tags: article.tags?.join(", ") || "" 
+          tags: article.tags || []
         });
       } else {
         setFormData({
@@ -36,7 +38,7 @@ const ArticleFormModal: FC<ArticleFormModalProps> = ({
           content: "",
           rating: 3,
           status: "unread",
-          tags: "",
+          tags: [],
           notes: "",
         });
       }
@@ -54,16 +56,13 @@ const ArticleFormModal: FC<ArticleFormModalProps> = ({
     setFormData((prev) => ({ ...prev, rating: newRating }));
   };
 
+  const handleTagsChange = (newTags: string[]) => {
+    setFormData((prev) => ({ ...prev, tags: newTags }));
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const finalData = {
-      ...formData,
-      tags: formData.tags
-        .split(",")
-        .map((tag) => tag.trim())
-        .filter(Boolean),
-    };
-    onSave(finalData as Omit<Article, "id" | "created_at">);
+    onSave(formData as Omit<Article, "id" | "created_at">);
   };
 
   if (!isOpen) return null;
@@ -145,14 +144,17 @@ const ArticleFormModal: FC<ArticleFormModalProps> = ({
               </span>
             </div>
           </div>
-          <input
-            type="text"
-            name="tags"
-            value={formData.tags}
-            onChange={handleChange}
-            className="w-full mt-1 bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white"
-            placeholder="Nhãn (phân cách bằng dấu phẩy)"
-          />
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Nhãn
+            </label>
+            <TagInput
+              selectedTags={formData.tags}
+              allTags={allTags}
+              onTagsChange={handleTagsChange}
+              placeholder="Nhập nhãn mới hoặc chọn từ danh sách..."
+            />
+          </div>
           <textarea
             name="notes"
             value={formData.notes}
