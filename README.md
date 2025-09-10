@@ -55,7 +55,7 @@ Bạn muốn tự mình trải nghiệm hoặc đóng góp cho dự án? Hãy l�
 
 ### 1. Clone Repository
 
-    git clone https://github.com/your-username/nymble-app.git
+    git clone https://github.com/ArthurHoang15/Nymble.git
     cd nymble-app
 
 ### 2. Cài đặt Dependencies
@@ -75,8 +75,6 @@ Bạn muốn tự mình trải nghiệm hoặc đóng góp cho dự án? Hãy l�
 ### 4. Khởi động Development Server
 
     npm run dev
-
-Mở trình duyệt và truy cập `http://localhost:5173`.
 
 ## 🤝 Đóng Góp
 
