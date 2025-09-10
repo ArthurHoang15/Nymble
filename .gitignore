@@ -22,3 +22,78 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables and configuration files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+.env.*
+!.env.example
+
+# API keys and secrets
+config/secrets.json
+config/keys.json
+secrets/
+keys/
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+database.json
+db.json
+
+# Backup files
+*.backup
+*.bak
+*.tmp
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Supabase local development
+.supabase/
+supabase/.env
+
+# Authentication and session files
+auth.json
+session.json
+token.json
+credentials.json
+
+# Private configuration
+config/private/
+private/
+confidential/
+
+# Build artifacts that might contain sensitive data
+build/
+coverage/
+.nyc_output/
+
+# Personal notes and documentation
+NOTES.md
+TODO.md
+PERSONAL.md
+docs/private/
+
+# Deployment and infrastructure files
+deploy/
+terraform/
+ansible/
+docker-compose.override.yml
+docker-compose.production.yml
