@@ -1,7 +1,8 @@
-import type { FC } from 'react';
-import type { ArticleItemProps } from '../types';
-import { STATUS_OPTIONS, RATING_LABELS } from '../constants';
-import StarRating from './StarRating';
+import type { FC } from "react";
+import { Edit, Trash2 } from "lucide-react";
+import type { ArticleItemProps } from "../types";
+import { STATUS_OPTIONS, RATING_LABELS } from "../constants";
+import StarRating from "./StarRating";
 
 const ArticleItem: FC<ArticleItemProps> = ({ article, onEdit, onDelete }) => {
   return (
@@ -44,29 +45,33 @@ const ArticleItem: FC<ArticleItemProps> = ({ article, onEdit, onDelete }) => {
           Link Github/Tool
         </a>
       )}
-      <div className="flex flex-wrap gap-2 mt-3">
-        {article.tags.map((tag) => (
-          <span
-            key={tag}
-            className="bg-gray-700 text-indigo-300 text-xs font-medium px-2.5 py-1 rounded-full"
+      <div className="flex justify-between items-center mt-3">
+        <div className="flex flex-wrap gap-2">
+          {article.tags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-gray-700 text-indigo-300 text-xs font-medium px-2.5 py-1 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex space-x-3 ml-4">
+          <button
+            onClick={() => onEdit(article)}
+            className="flex items-center space-x-1 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
           >
-            {tag}
-          </span>
-        ))}
-      </div>
-      <div className="flex justify-end mt-4 space-x-2">
-        <button
-          onClick={() => onEdit(article)}
-          className="text-sm text-gray-300 hover:text-white"
-        >
-          Sửa
-        </button>
-        <button
-          onClick={() => onDelete(article.id)}
-          className="text-sm text-red-400 hover:text-red-300"
-        >
-          Xóa
-        </button>
+            <Edit className="w-4 h-4" />
+            <span>Sửa</span>
+          </button>
+          <button
+            onClick={() => onDelete(article.id)}
+            className="flex items-center space-x-1 bg-red-600 hover:bg-red-500 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
+          >
+            <Trash2 className="w-4 h-4" />
+            <span>Xóa</span>
+          </button>
+        </div>
       </div>
     </div>
   );
